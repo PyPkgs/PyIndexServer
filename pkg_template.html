@@ -16,10 +16,7 @@
   
   <!-- Marked parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  
-  <!-- Favicon -->
-  <link href="https://gist.githubusercontent.com/astariul/c09af596e802e945d3032774e10e1047/raw/f693a2e2b65966494da082887bc4be2917f615e4/random_icon.svg" rel="icon" />
-  
+    
   <!-- Custom Styles -->
   <link href="../static/package_styles.css" rel="stylesheet" />
   
@@ -59,7 +56,10 @@
     </pre>
     
     <pre id='installcmd'>
-      <code>pip install _package_name --extra-index-url https://astariul.github.io/github-hosted-pypi/</code>
+      <code>
+        <span style="color:gray;">alias python=python3 # on macOS/Linux</span>
+        <span style="color:black;">python -m pip install _package_name --extra-index-url https://PyPkgs/PyIndexServer.github.io/pypi-server/</span>
+      </code>
     </pre>
     
     <hr />
