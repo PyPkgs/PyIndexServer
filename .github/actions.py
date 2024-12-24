@@ -40,7 +40,7 @@ def is_stable(version):
 
 
 def package_exists(soup, package_name):
-    package_ref = f'packages/{package_name}.html/'
+    package_ref = f'packages/{package_name}.html'
     for anchor in soup.find_all('a'):
         if anchor['href'] == package_ref:
             return True
@@ -69,7 +69,7 @@ def update(pkg_name, version, homepage):
 
     # Change the version in the main page (only if stable)
     if is_stable(version):
-        anchor = soup.find('a', attrs={'href': f'packages/{norm_pkg_name}.html/'})
+        anchor = soup.find('a', attrs={'href': f'packages/{norm_pkg_name}.html'})
         spans = anchor.find_all('span')
         spans[1].string = norm_version
         with open(INDEX_FILE, 'wb') as index:
@@ -129,7 +129,7 @@ def register(pkg_name, version, author, short_desc, homepage):
     placeholder_card = BeautifulSoup(INDEX_CARD_HTML, 'html.parser')
     placeholder_card = placeholder_card.find('a')
     new_package = copy.copy(placeholder_card)
-    new_package['href'] = f'packages/{norm_pkg_name}.html/'
+    new_package['href'] = f'packages/{norm_pkg_name}.html'
     new_package.contents[0].replace_with(pkg_name)
     spans = new_package.find_all('span')
     spans[1].string = norm_version  # First span contain the version
@@ -170,10 +170,10 @@ def delete(pkg_name):
         raise ValueError(f'Package {norm_pkg_name} seems to not exists')
 
     # Remove the package directory
-    # shutil.rmtree(norm_pkg_name)
+    os.remove(f'packages/{norm_pkg_name}.html')
 
     # Find and remove the anchor corresponding to our package
-    anchor = soup.find('a', attrs={'href': f'packages/{norm_pkg_name}.html/'})
+    anchor = soup.find('a', attrs={'href': f'packages/{norm_pkg_name}.html'})
     anchor.extract()
     with open(INDEX_FILE, 'wb') as index:
         index.write(soup.prettify('utf-8'))
@@ -194,11 +194,6 @@ def main():
     elif action == 'DELETE':
         delete(
             pkg_name=os.environ['PKG_NAME']
-        )
-    elif action == 'UPDATE':
-        update(
-            pkg_name=os.environ['PKG_NAME'],
-            version=os.environ['PKG_VERSION']
         )
 
 
