@@ -61,7 +61,6 @@ sample-package==0.1
 ---
 
 ## Useful links & Credits ✨
-- [pypi-server
-](https://github.com/astariul/pypi-server)
+- [github-hosted-pypi](https://github.com/astariul/github-hosted-pypi)
 
 ---
